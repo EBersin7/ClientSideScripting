@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+
+<html>
+
+    <head>
+        <title>Edward Bersin's 4350 Website Home</title> <!-- the title displayed on the browser tab -->
+
+        <link href="styles.css" rel="stylesheet" type="text/css" /> <!-- the reference to the external style sheet CSS -->
+
+        <script src="http://ajax.googleapis.com/ajax/libs/angularjs/1.4.8/angular.min.js"></script> <!-- the reference to the angular js library, allows use of ng-include directive -->
+    </head>
+
+    <body>
+        <div ng-app=""> <!-- allows for use of ng directives -->
+
+            <div id="container"> <!-- box to hold all the other elements -->
+
+                <div ng-include src="'top.html'"> </div> <!-- reference to top.html for the header -->
+
+                <div id="content"> <!-- holds main content of the page -->
+
+                    <div id="block"> <!-- background to hold text and stand out -->
+
+                        <h1>History & Purpose</h1>
+
+                        <p>
+                            The website you see before you was designed as a tribute to gaming's most powerful character,
+                            Mario! As the all-time highest selling video game franchise in history, it is hard to find a CS student
+                            (or anyone with an interest in technology) who has not heard of the original jumpman. With ventures in arcades,
+                            home consoles, mobile devices, movies, television, toys, and just about any other business you can think of,
+                            Mario's iconic status rises above all others. His legacy is so powerful that he was even featured in Japan's
+                            Tokyo 2020 Olympic preview this year. The background of this site features the first level of the classic
+                            Super Mario Bros. game. Read on for more on his history and for links to neat Nintendo sites.
+                        </p>
+
+                        <p>
+                            The Super Mario franchise is a massive media franchise primarily consisting of video games published and produced by Nintendo starring
+                            the fictional Italian character Mario. The franchise's other largest forms of media include several television series 
+                            and a feature film. It was originally created by game designer Shigeru Miyamoto with the arcade game Donkey Kong, 
+                            released on July 9, 1981. The games have been developed by a variety of developers including Nintendo, 
+                            Hudson Soft, and AlphaDream. Most Mario games have either been released for the arcade or Nintendo video 
+                            game consoles and handhelds dating from the Nintendo Entertainment System to the current generation of video game consoles.
+                        </p>
+
+                        <p>
+                            The main series in the franchise is the Super Mario platform series, which mostly follows Mario's adventures in the 
+                            fictional world of the Mushroom Kingdom. These games typically rely on Mario's jumping ability to allow him to progress
+                            through levels. Analysts suggest that by 2012, the Mario franchise was valued at over $10 billion. The franchise has 
+                            spawned over 200 games of various genres. The entire franchise, including series such as Super Mario, Mario Kart, Mario Party,
+                            Mario Tennis, and Mario Golf, have sold more than 500 million copies worldwide, making it the best-selling video game franchise of all time.
+                        </p>
+
+                        <p>
+                            To learn more about Nintendo's most iconic franchise, visit the official product site <a href="http://mario.nintendo.com/">here</a>
+                        </p>
+
+                    </div>
+
+                </div>
+
+                <div ng-include src="'bottom.html'"> </div> <!-- reference to bottom.html for the footer -->
+
+            </div>
+
+        </div>  
+    </body>
+
+</html>

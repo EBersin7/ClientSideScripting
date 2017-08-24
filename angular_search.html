@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html ng-app="showScope">
+    <head>
+        <meta charset="utf-8">
+        <title>Edward Bersin's 4350 AngularJS Search</title>
+        <style>
+            body{
+                text-align: center;
+                margin: auto;
+                background-color: deepskyblue;
+                font-size: 14px;
+            }
+            th{
+                text-align: center;
+                margin: auto;
+                padding: 40px;
+                background-color: whitesmoke;
+                border-radius: 10px;
+                border: 5px solid black;
+                font-size: 24px;
+            }
+            td{
+                text-align: center;
+                margin: auto;
+                padding: 50px;
+                background-color: coral;
+                border-radius: 5px;
+                border: 5px solid black;
+                font-size: 16px;
+            }
+            a{
+                color: black;
+            }
+        </style>
+    </head>
+    <body ng-controller="ShowControl">
+        <!-- input area for filtering, all fields are checked even the image url -->
+        <h3>AngularJS Search</h3>
+        <p>Enter a string of letters to search the catalog for entries containing the input: <input ng-model="query" type="text"/></p>
+        <br/><br/>
+    <center>
+        <!-- creation of the table -->
+        <table>
+            <tr>
+                <th><a href="" ng-click="sortField = 'Title'; reverse = !reverse">Title</a></th>
+                <th>Image</th>
+                <th><a href="" ng-click="sortField = 'Channel'; reverse = !reverse">Channel</a></th>
+                <th><a href="" ng-click="sortField = 'Rating'; reverse = !reverse">Rating</a></th>
+                <th><a href="" ng-click="sortField = 'Year_First_Aired'; reverse = !reverse">Year_First_Aired</a></th>
+            </tr>
+            <tr ng-repeat="show in TV_Shows| filter:query | orderBy:sortField:reverse">
+                <td>{{show.Title}}</td>
+                <td><img ng-src = "{{show.URL}}" width="100"></td>
+                <td>{{show.Channel}}</td>
+                <td>{{show.Rating}}</td>
+                <td>{{show.Year_First_Aired}}</td>
+            </tr>
+        </table>
+    </center>
+    <script src="http://ajax.googleapis.com/ajax/libs/angularjs/1.4.8/angular.min.js"></script>
+    <script>
+                            //function call to get the table data
+                            var showApp = angular.module('showScope', []);
+                            showApp.controller('ShowControl', function ($scope, $http) {
+                                $http.get('webApi.jsp').success(function (data) {
+                                    $scope.TV_Shows = data.recordList;
+                                });
+
+                                $scope.sortField = 'Title';
+                            });
+    </script>
+</body>
+</html>

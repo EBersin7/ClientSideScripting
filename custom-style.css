@@ -1,0 +1,114 @@
+body {
+    min-height: 2000px;
+    background-color: lightskyblue;
+}
+@media screen and (min-width: 480px){
+    body {
+        min-height: 2000px;
+        background-color: grey;
+    }
+}
+
+.container{
+    margin: auto;
+    padding: auto;
+}
+
+h1{
+    font-family: "Helvetica", serif
+        text-align: left;
+    font-size: 20px;
+    font-style: oblique;
+}
+
+h2{
+    font-family: "Helvetica", serif
+        text-align: center;
+    font-size: 16px;
+}
+
+h3{
+    font-family: "Helvetica", serif
+        text-align: left;
+    color: white;
+    font-size: 24px;
+    padding-bottom: 10px;
+    padding-left: 10px;
+}
+
+#page1{
+    margin-top: 75px;
+}
+
+#page2{
+    margin-top: 10px;
+}
+
+#page3{
+    margin-top: 10px;
+}
+
+/*Custom Rule #1. I changed the background color of the jumbotron to and I made font inside it 36px*/
+.jumbotron{
+    color: black;
+    background-color: white;
+    font-size: 36px;
+}
+
+/*Custom Rule #2. I aligned all text to the center of the row elements and put a margin to auto to create space*/
+.row{
+    text-align: center;
+    margin: auto;
+    font-size: 12px
+}
+
+/*Custom Rule #3. I changed the color of the font to white so that it can stand out on the gray background and it is aligned left*/
+.form-group{
+    font-size: 12px;
+    color: white;
+    text-align: left;
+    margin: auto;
+    padding: 10px;
+}
+
+#block{
+    border: 5px dotted black;
+    margin-bottom: 75px;
+}
+
+.slide1{
+    border: 2px solid black;
+    min-height: 400px;
+    max-height: 800px;
+}
+
+.slide2{
+    border: 2px solid black;
+    min-height: 400px;
+    max-height: 800px;
+}
+.slide3{
+    border: 2px solid black;
+    min-height: 400px;
+    max-height: 800px;
+}
+
+#footer {
+    z-index: 5; 
+    position: fixed; 
+    width: 100%; 
+    bottom: 0px;
+    left: 0px;
+
+    border-top: 2px solid black; 
+    color: black;
+    clear: both;
+    text-align: center;
+    padding: 10px;
+    margin: auto;
+
+    font-family: "Helvetica", serif
+        font-size: 2.0px;
+    letter-spacing: 2.0px;
+    background-color: white;
+}

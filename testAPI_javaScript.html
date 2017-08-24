@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Get Sally's Country Flags (ajax demo)</title>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+
+        <style type="text/css">
+            body {
+                background-color: navy;
+                color:white;
+                font-size:14px;
+                font-weight:bold;
+                letter-spacing:1px;
+                line-height:24px;
+                margin:auto;
+                font-family:Verdana, Geneva, sans-serif;
+            }
+            #box, table, #countryList {
+                margin:15px;
+            }
+
+            #imageContainer {
+                width:70px;
+                height: 60px;
+                display:none;
+            }
+
+            #flagCountry {
+                padding-bottom:25px;
+            }
+        </style>
+
+        <script language="Javascript" type="text/javascript">
+
+            //Make the XMLHttpRequest Object
+            var httpReq;
+            if (window.XMLHttpRequest) {
+                httpReq = new XMLHttpRequest();  //For Firefox, Safari, Opera
+            } else if (window.ActiveXObject) {
+                httpReq = new ActiveXObject("Microsoft.XMLHTTP");         //For IE 5+
+            } else {
+                alert('ajax not supported');
+            }
+
+            function $(element) {
+                return document.getElementById(element);
+            }
+
+            function sendRequest() {
+                //alert ('sending request'); 
+                //var url = "http://cis-linux2.temple.edu:8080/SP16_3344_sallyk/countryFlagsJSON.jsp";
+                var url = "getCountryFlagsAPI.jsp";
+                url += "?q=" + $("countrySearch").value;
+                //alert("url is " + url);
+                httpReq.open("GET", url);
+                httpReq.onreadystatechange = handleResponse;
+                httpReq.send(null);
+                $("picture").src = "";
+                $("imageContainer").style.display = "none";
+                $("flagCountry").innerHTML = "";
+                $("other").innerHTML = "";
+                $("countryList").innerHTML = "";
+            }
+
+            function handleResponse() {
+                //alert('handling response');
+                if (httpReq.readyState == 4 && httpReq.status == 200) {
+
+                    var response = httpReq.responseText;
+                    //alert("response text is " + response);
+
+                    // wrap the json in parentheses to avoid tripping over javascript ambiguity...
+                    response = "(" + response + ")";
+                    var obj = eval(response);
+          
+                                          
+                    if (obj == null) {
+                        $("#countryList").innerHTML = "Error: JSON string evaluated to null.";
+                        return;
+                    }
+                    if (obj.dbError == null) {
+                        $("#countryList").innerHTML = "Error: JSON string did not have a 'dbError' property.";
+                        return;
+                    }
+
+                    if (obj.dbError.length > 0) {
+                        $("#countryList").innerHTML = "Database error: " + obj.dbError;
+                        return;
+                    }
+
+                    if (obj.recordList == null) {
+                        $("#countryList").innerHTML = "Error: JSON string did not have a 'recordList' property.";
+                        return;
+                    }
+
+                    if (obj.recordList.length == 0) {
+                        $("#countryList").innerHTML = "No Countries Match Your Search";
+                        return;
+                    }
+
+
+                    var flagURL = obj.recordList[0].flagURL;
+                    if (flagURL != null) {
+                        $("picture").src = flagURL; //jsonObj.artist.image[4]['#text'];
+                    }
+
+                    $("flagCountry").innerHTML = obj.recordList[0].countryName;
+
+                    $("other").innerHTML = "All countries that match";
+                    var cList = $("countryList");
+                    var numCountries = obj.recordList.length;
+
+                    for (i = 0; i < numCountries; i++) {
+                        cList.innerHTML += obj.recordList[i].countryName + "<br/>";
+                    }
+
+                    $("imageContainer").style.display = "block";
+                }
+            }
+
+        </script>
+
+    </head>
+    <body>
+        <div id="box">
+            <h1>Get Country Flag</h1>
+            Must "Run" (through localhost), not "View"<br/><br/>
+            Enter starting characters of country for search, for example
+            <input type="text" id="countrySearch" value="A" size="30" />
+            <input type="button" value="Get Country and Flag" onClick="javascript:sendRequest()"/>
+            <br/>
+            <table>
+                <tr>
+                    <td id="imageContainer">
+                        <img id="picture" src="">
+                    </td>
+                    <td id="flagCountry">
+                    </td>
+                </tr>
+            </table>
+
+            <h3 id="other"></h3>
+            <div id="countryList"></div>
+        </div>
+    </body>
+</html>

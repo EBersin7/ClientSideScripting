@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+
+<html>
+
+    <head>
+        <title>Edward Bersin's 4350 jQuery Alternate Home Page</title>
+
+        <link href="styles2.css" rel="stylesheet" type="text/css" /> <!-- the reference to the new external style sheet CSS -->
+    </head>
+
+    <body>
+        <div id="titleNav">
+
+            <div id="pageTitle">
+                <a href="index.html">Super Luigi Bros.</a>
+            </div>
+
+            <div id="nav">
+
+                <div class="navLink">
+                    <a href="index.html">Home</a>
+
+                    <a href="labs.html">Labs</a>
+
+                    <a href="animation.html">Animation</a>
+
+                    <a href="jquery.html">jQuery</a>
+                </div>
+
+            </div>
+
+            <span class="stopFloat"></span>
+
+        </div>
+
+        <div id="container"> <!-- box to hold all the other elements -->
+
+            <div id="content"> <!-- holds main content of the page -->
+
+                <div id="block"> <!-- background to hold text and stand out -->
+
+                    <h1> jQuery Instructions</h1>
+
+                    <ol>
+
+                        <li>On page load, this content box and the image below fade in from the background.</li>
+
+                        <li>Hover over any links in the nav bar to make them wiggle up and down.</li>
+
+                        <li>Click on the image below to expand and reveal the background picture</li>
+
+                        <li>The content box will fade slightly after it has been hovered over.</li>
+
+                    </ol>
+
+                </div>
+
+                <div id="expand">
+
+                </div>
+
+            </div>
+
+        </div>
+
+        <div id="footer">
+            Edward Bersin 2016
+        </div>
+
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.0/jquery.min.js"></script>
+
+        <script>
+            //fades in the block with the instructions on page load
+            $("#block").animate({opacity: "1"}, 3000);
+            $("#block").animate({top: "100px"}, 100);
+            $("#block").animate({top: "75px"}, 100);
+            $("#block").animate({top: "50px"}, 100);
+            $("#block").animate({top: "25px"}, 100);
+
+            //fades in the image on page load - works
+            $("#expand").animate({opacity: "1"}, 3000);
+
+            //increases the size of the image block when clicked on and decreases when clicked again
+            var pos = 0;
+            $("#expand").click(function () {
+                if (pos !== 0) {
+                    $("#expand").animate({height: "100px"});
+                    pos = 0;
+                } else {
+                    $("#expand").animate({height: "500px"});
+                    pos = 1;
+                }
+            });
+
+            //makes the links in the nav bar wiggle up and down
+            $(".navLink a").mouseenter(function () {
+                $(this).animate({top: '10px'}, 100);
+                $(this).animate({top: '-10px'}, 100);
+                $(this).animate({top: '0px'}, 100);
+                $(this).animate({top: '10px'}, 150);
+                $(this).animate({top: '-10px'}, 150);
+                $(this).animate({top: '0px'}, 150);
+            });
+
+            //makes the page title link wiggle
+            $("#pageTitle a").mouseenter(function () {
+                $(this).animate({top: '10px'}, 100);
+                $(this).animate({top: '-10px'}, 100);
+                $(this).animate({top: '0px'}, 100);
+                $(this).animate({top: '10px'}, 150);
+                $(this).animate({top: '-10px'}, 150);
+                $(this).animate({top: '0px'}, 150);
+            });
+
+            //makes the instructions block fade when hovered over
+            $("#block").mouseenter(function () {
+                $("#block").animate({opacity: "0.85"}, 300);
+            });
+
+        </script>
+    </body>
+
+</html>

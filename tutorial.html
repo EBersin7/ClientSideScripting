@@ -1,0 +1,274 @@
+<!DOCTYPE html>
+
+<html>
+
+    <head>
+        <title>Edward Bersin's 4350 Tutorial</title>
+
+        <link href="tutstyles.css" rel="stylesheet" type="text/css" />
+    </head>
+
+    <body>
+        <div id="container">
+
+            <div id="titleNav">
+
+                <div id="pageTitle">
+                    <a href="#">ScrollMagic Tutorial</a>
+                </div>
+
+                <ul id="drop-nav">
+                    <li><a href="#">Labs</a>
+                        <ul>
+                            <li><a href="tutorial.html">Home</a></li>
+                            <li><a href="labs.html">Labs</a></li>
+                            <li><a href="animation.html">Animation</a></li>
+                            <li><a href="jquery.html">jQuery</a></li>
+                            <li><a href="bootstrap.html">Bootstrap</a></li>
+                            <li><a href="EdwardBersin_MySQL_Document.docx">MySQL</a></li>
+                            <li><a href="testApiDomJs.html">Web API JS</a></li>
+                            <li><a href="angular_search.html">AngularJS Search</a></li>
+                            <li><a href="tutorial.html">ScrollMagic Tutorial</a></li>
+                        </ul>
+                    </li>
+                </ul>
+
+                <span class="stopFloat"></span>
+            </div>
+
+            <div id="content"> <!-- holds main content of the page -->
+
+                <h1>Introduction to ScrollMagic</h1>
+
+                <p>
+                    Welcome to a beginner's guide to ScrollMagic! This JavaScript library offers a simple, but robust way
+                    to add effects to your HTML page elements based on user scroll position.<br><br>
+                    The library in its current version works with plain old JavaScript, HTML, and CSS. However, the library
+                    can also be utilized through plugins available for jQuery, GSAP, and VelocityJS. For developers, this 
+                    allows for customization and component extension.<br><br>
+                    Some of the features provided for by the framework plugins include animation triggering, element pinning,
+                    easy parallax effects, infinitely scrolling pages, and callback pinning.<br><br>
+                    ScrollMagic works on object oriented principles just like normal JavaScript. It was designed to be lightweight, 
+                    flexible, mobile compatible, and screen responsive among other things.<br><br>
+                    Because of the tremendous depth of functionality provided by ScrollMagic, this tutorial will focus on the key concepts
+                    in a few simple examples and provide alternate <br>resources for further learning.<br><br>
+                </p>
+
+                <h1>How To Get Started</h1>
+
+                <p>
+                    The first thing that must be done to start using ScrollMagic is to include the library in your code.
+                    There are several ways to accomplish this as listed and described below. <br><br>
+                    The recommended way is to use the Content Delivery Network as it does not require you to perform a
+                    full download of the library. Also, it is possible that browser caching <br>occurs for users which speeds up page load. <br><br>
+                    Plugins required for specific frameworks/libraries will be provided and discussed in their respective sections.
+                </p>
+                <ol>
+                    <li>Content Delivery Network - <mark>https://cdnjs.cloudflare.com/ajax/libs/ScrollMagic/2.0.5/ScrollMagic.js</mark>
+                        <br>To use the CDN, you must include the above code in a script tag with the source set to the link.
+                        <br>Place the finished product in your head section and it should look something like this:
+                        <br><img src="example1.png" alt="e1"><br><br></li>
+
+                    <li>Github Download - <mark><a href ="https://github.com/janpaepke/ScrollMagic/releases">Full Source</a></mark>
+                        <br>To make use of the full library download, you must include it in your project's library folder.
+                        <br>Then you should declare its usage with a script tag in your page like this:
+                        <br><img src="example2.png" alt="e1"><br><br></li>
+
+                    <li>Node Package Manager - <mark>$ npm install scrollmagic</mark>
+                        <br>To use NPM, you must already have the program installed on your device.
+                        <br>The official developer site can be found <a href="https://www.npmjs.com/" >here</a> with instructions on how to download.
+                        <br>After NPM is working, you can enter the above command line call to install the library.
+                        <br>Then you should declare its usage in the same way as above. The following snippet uses the minified version:
+                        <br><img src="example3.png" alt="e1"><br><br></li>
+                </ol>
+
+                <p>
+                    There is one last download that is highly recommended before starting. It is the debugging plugin.<br>
+                    <br>This plugin will allow you to see markings on the scroll bar to know when events should trigger.<br>
+                    <br>It also provides extra functions which enable you to print pertinent debug info to the console.<br>
+                    <br>The CDN is provided for simplicity, but the full library download and include method works as well:
+                    <br><mark>http://cdnjs.cloudflare.com/ajax/libs/ScrollMagic/2.0.5/plugins/debug.addIndicators.js</mark>
+                </p>
+
+                <h1>How Does It Work</h1>
+
+                <p>
+                    The basic idea behind the library is the use of a Controller object and Scene objects. The controller
+                    becomes the manager and activator of effects to given scenes.<br>
+                    <br>The scenes determine and describe to the controller what effects to apply and when. Each scene can
+                    reference an HTML element through CSS selectors or<br> remain blank to trigger at the top of the page.<br>
+                    <br>Enter the body section of your HTML page and create a script tag at the bottom. With the script towards
+                    the end, the rest of the HTML is given a chance to load<br> before running animation.
+                    In the JavaScript, create a variable to represent the controller and then create a new ScrollMagic
+                    Controller object:
+                    <br><img src="example4.png" alt="e1"><br><br>
+
+                    It is possible to set properties for all scenes by modifying the controller object on instantiation.
+                    However, like with CSS, properties redefined<br> later by scenes will overwrite anything set here:
+                    <br><img src="example7.png" alt="e1"><br><br>
+
+                    The controller is now created and will be linked to the browser scrollbar. Now, we can begin creating
+                    scenes for the newly created controller.<br>
+                    For this task, we will create another variable to represent the scene and then we will create a new
+                    ScrollMagic Scene object:
+                    <br><img src="example5.png" alt="e1"><br><br>
+
+                    At this point, we can style the scene variable with a variety of properties. These properties will be
+                    placed into the Scene constructor as a JavaScript object.<br>
+                    The syntax of the object is similar to what you would see in a CSS element. <br>In the following example,
+                    several of the most important properties are applied and described:
+                    <br><img src="example6.png" alt="e1"><br><br>
+
+                    Finally, the scene can be given to the controller and connected. There are several ways to add the scene
+                    to the controller for management. They are detailed as follows:
+                    <br><img src="example8.png" alt="e1"><br><br>
+
+                    Before leaving the basics, it would be helpful to point out indicators. If you are using the debugging plugin,
+                    you can add marks to the scroll bar to indicate when an event should trigger.
+                    This can be a very helpful tool when it comes to resolving issues in your code. The addition of these ticks,
+                    <br><img src="example9.png" alt="e1"><br>
+                    is performed by tacking on the following function during scene creation:
+                    <br><img src="example10.png" alt="e1"><br><br>
+                </p>
+
+                <h1>CSS Class Toggling</h1>
+
+                <p>
+                    Class toggling with ScrollMagic is a way to change the appearance of your HTML elements using just CSS
+                    and JavaScript. In simple terms, you will define several styles<br> for a particular item.
+                    Then, by using nested classes inside of your CSS element description, you can switch between
+                    several looks for a given element.<br>
+                    <br>This functionality is similar to the effects provided for by other libraries including jQuery.
+                    The difference is that instead of calling pre-defined functions, you will write your whole, specific
+                    style for each item to toggle. This allows a larger range of control over the look and feel of your effects
+                    while maintaining a higher degree of simplicity.<br><br>
+
+                    To start on this method, we will first create two sections to mess with and adjust:
+                    <br><img src="example11.png" alt="e1"><br><br>
+
+                    Next we will need a style area to control the look of the two boxes:
+                    <br><img src="example12.png" alt="e1"><br><br>
+
+                    At this point, the first box will appear red and the second box will appear blue. To implement the toggle,
+                    we must now put in a style to switch over to:
+                    <br><img src="example13.png" alt="e1"><br><br>
+
+                    Now, we create the scene objects, call the setClassToggle method, and add the scenes to the controller.
+                    Any properties set in the scene will determine when the toggle triggers.<br>
+                    This example will cause the boxes to change their color to orange/purple when the scrollbar reaches the halfway point
+                    of the specified element:
+                    <br><img src="example14.png" alt="e1"><br><br>
+
+                    The setClassToggle method uses the given parameters to determine where to look for the class to switch on.
+                    The style defined in the CSS determines how the transition will occur. <br><br>
+                    A simple example can be located <a href="toggle.html">here</a>
+                </p>
+
+                <h1>jQuery</h1>
+
+                <p>
+                    jQuery is a very popular JavaScript library which supports a multitude of HTML manipulating functions.
+                    With methods designed for animation and event handling,<br> jQuery uses similar concepts as ScrollMagic.<br>
+                    <br>However, the connection to the scrollbar and event triggering is done entirely through the Controller
+                    abstraction whereas in jQuery much more explicit code is<br> required to achieve the same effect.<br>
+                    <br>With all that said, ScrollMagic supports the usage of jQuery and can incorporate several helpful
+                    functions into its code.
+                    <br>To get started, use this CDN to add the jQuery library to your project:
+                    <br><mark>https://ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js</mark><br><br>
+
+                    Minor changes can now be made to the code, for instance, compare this chunk of code, to the original
+                    declaration of the controller:
+                    <br><img src="example15.png" alt="e1"><br><br>
+
+                    Both creations of the controller complete the same task, but the jQuery one uses a function to work
+                    with the given HTML element.<br><br>
+
+                    A useful function that comes from the inclusion of jQuery is the each function. This allows you to
+                    cycle through all the parts of a specific item in your HTML.<br>
+                    The each function used below, demonstrates how many scenes can be created and added to a controller
+                    by iterating through the class:
+                    <br><img src="example16.png" alt="e1"><br><br>
+
+                    A final important thing to know about using jQuery with ScrollMagic is the ability to create your own functions.
+                    Using the general format here,
+                    <br><img src="example17.png" alt="e1"><br><br>
+                    it is possible to extend the abilities of both libraries with scene creation and customization.
+                </p>
+
+                <h1>GSAP</h1>
+
+                <p>
+                    GreenSock Animation Plugin is one of the plugins that ScrollMagic can utilize to extend its capabilities
+                    and create professional looking animation. Able to touch and move any object created in JavaScript,
+                    GSAP offers an easy to use interface for ScrollMagic to adapt.<br><br>
+
+                    To use GSAP, it is also required that you have jQuery in your code. The full source block for GSAP, jQuery,
+                    and ScrollMagic is here:
+                    <br><img src="example18.png" alt="e1"><br><br>
+
+                    The main usage covered here will be that of Tweens. The Tween class will be used to create variables
+                    that can be animated when passed an HTML element.<br>
+                    For this simple example, we will focus on moving an item to a new location. That purpose is handled
+                    by the following related functions: 
+                </p>
+
+                <ol>
+                    <li>from - animate FROM the entered location to the default value in the style sheet</li>
+                    <li>to - animate TO the entered location from the default value in the style sheet</li>
+                    <li>fromTo - animate FROM one entered location TO a second entered location</li>
+                </ol>
+
+                <p>
+                    To keep it simple, we will assume all previous code has been reused up to this point. Now, we
+                    wish to create a variable for the Tween and setup the from function on it. This moves the box
+                    from the given position to whatever is declared in the style sheet:
+                    <br><img src="example19.png" alt="e1"><br><br>
+
+                    Finally, we use our scene creation to set the tween and add it to the controller:
+                    <br><img src="example20.png" alt="e1"><br><br>
+
+                    The finished product causes the box1 element to move from the bottom left of the screen to
+                    the spot set in the original style sheet. This event is triggered when the user scrolls far enough
+                    down to enter the element. <br><br>
+                    An example can be located <a href="gsap.html">here</a>
+                </p>
+                <h1>VelocityJS</h1>
+
+                <p>
+                    Velocity.js is an animation engine that is closely related to GSAP. Velocity
+                    does not need jQuery to work, but it can also make use of it if you so wish.<br>
+                    <br>As you could expect, Velocity also requires a CDN to use the plugin:<br>
+                    <mark>https://cdnjs.cloudflare.com/ajax/libs/velocity/1.3.1/velocity.min.js</mark><br><br>
+
+                    There is a considerable amount of overlap between the setup to use GSAP and to use Velocity.
+                    To avoid redundancy, I will only describe and explain the critical section that varies.<br>
+
+                    In the following code snippet, the GSAP call to set the Tween is replace by the call to set the
+                    Velocity. The arguments for the call are first the element to be animated and then the list of
+                    animations to be performed:
+                    <br><img src="example21.png" alt="e1"><br><br>
+
+                    Given all other previous aspects are implemented properly, the use of Velocity above will cause
+                    the second box to disappear when the first box is triggered.
+                </p>
+
+                <h1>References</h1>
+
+                <ol>
+                    <li>The home page of the ScrollMagic developers and the source for most of the information provided
+                        can be found <a href="http://scrollmagic.io/">here</a>.</li>
+                    <li>An extremely detailed and extensive tutorial for ScrollMagic, which I used as a reference,
+                        can be found <a href="https://scotch.io/tutorials/building-interactive-scrolling-websites-with-scrollmagic-js">here</a>.</li>
+                    <li>Finally, a web page designed with ScrollMagic to create an awesome Rube Goldberg Machine can be
+                        located <a href="http://alfredservice.com/">here</a>.</li>
+                </ol>
+
+            </div>
+
+            <div id="footer">
+                Edward Bersin 2016
+            </div>
+
+        </div> 
+    </body>
+</html>

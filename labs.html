@@ -1,0 +1,210 @@
+<!DOCTYPE html>
+
+<html>
+
+    <head>
+        <title>Edward Bersin's 4350 Website Labs</title> <!-- the title displayed on the browser tab -->
+
+        <link href="styles.css" rel="stylesheet" type="text/css" /> <!-- the reference to the external style sheet CSS -->
+
+        <script src="http://ajax.googleapis.com/ajax/libs/angularjs/1.4.8/angular.min.js"></script> <!-- the reference to the angular js library, allows use of ng-include directive -->
+    </head>
+
+    <body>
+        <div ng-app=""> <!-- allows for use of ng directives -->
+
+            <div id="container"> <!-- box to hold all the other elements -->
+
+                <div ng-include src="'top.html'"> </div> <!-- reference to top.html for the header -->
+
+                <div id="content"> <!-- holds main content of the page -->
+
+                    <div id="block"> <!-- background to hold text and stand out -->
+
+                        <h1>Lab 1 - HTML Home Page with CSS</h1>
+
+                        <p>
+                            My experience with HTML, CSS, javascript/jquery, and client side frameworks before this class was
+                            just barely above zero. The farthest I had gone before with HTML was clicking 'View page source' on a website and even
+                            that was just an accident. The coding that I saw in HTML and javascript was familiar looking because of my
+                            prior CS classes, but it was still not something I believed I had a firm grasp on. Actual experience
+                            working in this field for this lab opened my eyes on the wide range of possibilities and control developers have
+                            over HTML documents.
+                        </p>
+
+                        <p>
+                            I used several advanced techniques within this lab. One that immediately stands out on my page is the gradient
+                            effect on the content block. Casting it from white to light blue, it gives a look of gently fading color. Another
+                            special style I used was shadowing. By setting a color and pixel size, I was able to give both the header and the
+                            content block a small shadow effect underneath them. This helps create the illusion that the boxes are actually 3D
+                            and hovering over the background image.
+                        </p>
+
+                        <p>
+                            I learned a lot in this lab, mainly everything a beginner needs to start work with HTML. One thing I picker up quickly
+                            was the use of tags in the language to create specialized sections. This led to research on the various tags that can
+                            be employed and what their general purpose is. The second big thing I learned was how a CSS works in the framework of
+                            a page. I was initially overwhelmed by the sheer number of options for design presented, but the naming conventions
+                            and common sense used in their functionality helped ease the learning process. Lastly, I learned how the angular directives
+                            and references allow for simple reuse of common code fragments. This makes designing a cohesive website much less work intensive.
+                        </p>
+
+                        <h1>Lab 2 - JavaScript Animation</h1>
+
+                        <p>
+                            The lab for this week involved using JavaScript to create a page with animation. Following up on my
+                            Super Mario theme, I took this opportunity to animate a sprite sheet of Mario himself from Super
+                            Mario Bros. 2. The Italian plumber can be made to run across the screen by pressing the "Move Mario"
+                            button on the animation page. When he reaches the green pipe, he disappears and reappears on the other
+                            end, true to his games. The other buttons on the page can be used to advance Mario frame by frame or to
+                            stop his run. Pressing the "Move Mario" button multiple times will increase his speed, but will require
+                            a page refresh to stop him.
+                        </p>
+
+                        <p>  
+                            I have previously taken several Java courses so I expected to be in familiar ground with JavaScript.
+                            However, there were a variety of differences which were surprising. The first big one is that variables
+                            did not need to have a type declared, they could accept and form to anything they were given. The other
+                            thing that I learned about was assigning buttons in the HTML to functions in the JavaScript. It was much
+                            simpler in JavaScript compared to Java which requires event handling, listeners, and GUI interaction.
+                            A link for this lab can be found <a href="animation.html">here</a>.
+                        </p>
+
+                        <h1>Lab 3 - jQuery Alternate Home Page</h1>
+
+                        <p>
+                            For this lab, we had to make use of jQuery to add effects and events to a page.
+                            I created a separate CSS to work on this and started with my original home page as
+                            a base. I edited colors and changed the content so that the formatting would be slightly
+                            different, but still familiar. The biggest changes come from the scripted events such the
+                            links which move when hovered over. An image can be found in the center of the screen and when
+                            clicked on it expands. Instructions for other effects can be found in a fading content box.
+                            A link for this lab can be found <a href="jquery.html">here</a>.
+                        </p>
+
+                        <h1>Lab 4 - Bootstrap Designed Page</h1>
+
+                        <p>
+                            In this lab, I created a newly designed page for my website's Mario theme. Using bootstrap, I was able
+                            to create a simple, but professional looking product sales page. The biggest point of this new design is
+                            that it is responsive to browser changes. The page can resize/reorder itself to suit mobile devices and
+                            larger screens smoothly. A specific component that is possible because of bootstrap is the row class. This
+                            class allowed me to create 3 separate panels for a product comparison side by side. The panels will stack
+                            on top of each other when the screen is shrunk. Another component that I used was the navbar. Design features
+                            in the navbar allow the links to become a drop down menu when the window is too small. This adds to the
+                            adaptability of the website design.
+                        </p>
+
+                        <p>
+                            The layout I like best is the Blackbox. The page design incorporates many elements, but it keeps the
+                            text sections very clean. Colors used are vivid without being too flashy. Browser changes cause certain images
+                            within the page to bounce off the wall and shake. Standard switch action, like divs stacking on top of each
+                            other when shrunk are also present.
+
+                            A link for this lab can be found <a href="bootstrap.html">here</a>.
+                        </p>
+
+                        <h1>Lab 5 - MySQL Workbench Database</h1>
+
+                        <p>
+                            In this lab, I worked with MySQL Workbench to design, implement, and populate a database. I also wrote several
+                            SQL SELECT statements to display the information in various ways. The database I created consisted of three different
+                            tables: User_Role, User_Info, and TV_Shows. Each table was designed with relevant and required information as outlined
+                            in the lab document. The query statements I coded ordered the tables by either their name column or title column.
+                            Certain selectors allowed for the total data table to be limited to only the records that met the requirements.
+                        </p>
+
+                        <p>
+                            The main components of this lab, including a data model that was reverse engineered from the database, have
+                            all been pictured and posted into a word document for viewing convenience.
+                            A download link for this document can be found <a href="EdwardBersin_MySQL_Document.docx">here</a>.
+                        </p>
+
+                        <h1>Lab 6 - Pre-Lab Activity</h1>
+
+                        <p>
+                            A link for the pre-lab activity can be found <a href="API_menu.html">here</a>.
+                        </p>
+
+                        <h1>Lab 6 - WebAPI and AJAX</h1>
+
+                        <p>
+                            This lab made use of last week's database lab to design a web API and implement a simple search function.
+                            We made use of AJAX function calls in our search queries and then displayed a table result from the database specified parameters. The DOM was modified in two different ways: through
+                            JavaScript and through jQuery. Libraries in JSON were also used in conjunction with a MySQL connector.
+                            A link to the raw JSON page can be found <a href="webApi.jsp">here</a>.
+                            A link to the API page using JavaScript can be found <a href="testApiDomJs.html">here</a>.
+                            A link to the API page using jQuery can be found <a href="testApiDomJq.html">here</a>.
+                        </p>
+
+                        <h1>Lab 7 - AngularJS Search</h1>
+
+                        <p>
+                            The lab this week invoked the web API we created last week to display information from our database in a sortable format.
+                            By using AngularJS, the table created on page load can be filtered by user input. Terms entered into the search
+                            box will limit the elements in the table to only those containing the search string. Each column of the table can be
+                            clicked on to sort the entire table by alphabetical order of that column. A consecutive click on the column name will
+                            reverse the order of the table based on the field. A small, unexpected (or possibly expected) result is that the search
+                            box will also look through the image URL to find a match. The only way I found to remedy this was to have a search box
+                            for each field. However, I found this to be too complex and ugly design-wise, so I left it simple and included instructions
+                            for use.
+                            A link to the page can be found <a href="angular_search.html">here</a>.
+                        </p>
+
+                        <h1>Tutorial - ScrollMagic</h1>
+
+                        <p>
+                            I created a tutorial page for the JavaScript library, ScrollMagic. The library is capable
+                            of animating and modifying HTML elements in a multitude of ways. Using a simple design, its
+                            two classes, Controller and Scene, are setup and implemented very straight forward. The library
+                            is compatible with jQuery, GSAP, and VelocityJS, but also supports just JavaScript with CSS and HTML.
+                            Simple examples are given for each area and they are all built upon previous sections.
+                            A link to the page can be found <a href="tutorial.html">here</a>.
+                        </p>
+
+                        <h1>AngularJS Triple Lab Part 1</h1>
+
+                        <p>
+                            This lab is part one of my AngularJS CRUD implementation. By using our existing web API and adding a few new
+                            ones, Create and Delete functions work on my database table. I learned a lot about how you can manipulate
+                            database information through client side AngularJS and server side APIs. An element has been deleted and
+                            a test element has been inserted already.
+                            A link to the page can be found <a href="CRUD.html">here</a>.
+                        </p>
+                        
+                        <h1>AngularJS Triple Lab Part 2</h1>
+
+                        <p>
+                            This lab is part two of my AngularJS CRUD implementation. This part required us to implement login/logoff
+                            functionality for the user and the ability to update existing records. For this purpose, I added three more
+                            JSP pages: update, login, and logoff. Each of these APIs required a corresponding function to be developed
+                            in my section of JavaScript. Sections on the HTML site and buttons to send the AJAX calls were also added.
+                            This lab casued a lot of problems for me, but the sample code I modified provided many error messages which
+                            helped locate my problem each time.
+                            A link to the page can be found <a href="CRUD.html">here</a>.
+                        </p>
+                        
+                        <h1>AngularJS Triple Lab Part 3</h1>
+
+                        <p>
+                            This lab is the final part of my AngularJS CRUD implementation. This part required us to implement login/logoff
+                            functionality which controlled the ability to edit and delete records. The angular directive ng-show was used in 
+                            conjunction with a boolean to determine whether edit mode is enabled/viewable. Each of the prior functions were
+                            extended slightly to handle the switching on and off by login. In the update and delete JSP pages, I added
+                            a check on the user's email from the session. If the string returned was null, then the user was not logged in.
+                            A link to the page can be found <a href="CRUD.html">here</a>. Here are the APIs for <a href="deleteApi.jsp">delete</a>,
+                            <a href="insertApi.jsp">insert</a>, <a href="loginApi.jsp">login</a>, <a href="logoffApi.jsp">logoff</a>, and
+                            <a href="updateApi.jsp">update</a>.
+                        </p>
+                    </div>
+
+                </div>
+
+                <div ng-include src="'bottom.html'"> </div> <!-- reference to bottom.html for the footer -->
+
+            </div>
+
+        </div>  
+    </body>
+
+</html>

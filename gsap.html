@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>GSAP Animation</title>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <script src="http://cdnjs.cloudflare.com/ajax/libs/ScrollMagic/2.0.5/ScrollMagic.min.js"></script>
+        <script src="http://cdnjs.cloudflare.com/ajax/libs/ScrollMagic/2.0.5/plugins/debug.addIndicators.min.js"></script>
+        <script src="http://cdnjs.cloudflare.com/ajax/libs/gsap/1.19.0/TweenMax.min.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/ScrollMagic/2.0.1/plugins/animation.gsap.js"></script>
+    </head>
+    <body>
+        <style type="text/css">
+            .active {
+                background-color: #307FB5;
+            }
+            form.move {
+                text-align: left;
+                position: fixed;
+                top: 70px;
+                right: 20px;
+                display: block;
+                background-color: white;
+                background-color: rgba(255, 255, 255, 0.9);
+                border-radius: 4px;
+                padding: 20px;
+                z-index: 20;
+            }
+            html,
+            body {
+                margin: 0;
+                height: 100%
+            }
+
+            h1,
+            p {
+                margin: 0;
+                padding: 0;
+            }
+
+            header {
+                position: fixed;
+                top: 10px;
+                left: 10px;
+            }
+
+            section {
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                text-align: center;
+                color: #EFEFEF;
+            }
+
+            .full-screen {
+                height: 100%; /* makes panels the entire window height */
+            }
+
+            .blue {
+                background-color: #3883d8;
+            }
+            .red {
+                background-color: #cf3535;
+            }
+            .orange {
+                background-color: #ea6300;
+            }
+        </style>
+        <main class="full-screen" role="main">
+            <section class="full-screen blue">
+                <div>
+                    <h1>Section One Is Boring!</h1>
+                </div>
+            </section>
+
+            <section id="scale-trigger" class="full-screen orange">
+                <div id="scale-animation">
+                    <p>Section Two Scales Down Using CSS Transform!</p>
+                </div>
+            </section>
+
+            <section id="bg-trigger" class="full-screen red">
+                <div id="bg-animation">
+                    <p>Section Three Changes Color!</p>
+                </div>
+            </section>
+
+            <section id="yoyo-trigger" class="full-screen blue">
+                <div>
+                    <p id="yoyo-animation">Section Four Yo-Yos, Yo!</p>
+                </div>
+            </section>
+        </main>
+        <script>
+            var scale_tween = TweenMax.to('#scale-animation', 5, {
+                transform: 'scale(.75)',
+                ease: Linear.easeNone
+            });
+
+            // BG Animation Setup
+            // .to('@target', @length, {@object})
+            var bg_tween = TweenMax.to('#bg-trigger', 5, {
+                backgroundColor: '#FFA500',
+                ease: Linear.easeNone
+            });
+
+            // YoYo Animation Setup
+            // .to(@target, @length, @object)
+            var yoyo_tween = TweenMax.to('#yoyo-animation', 1, {
+                transform: 'scale(2)',
+                ease: Cubic.easeOut,
+                repeat: -1, // this negative value repeats the animation
+                yoyo: true // make it bounce
+            });
+
+
+            // init ScrollMagic Controller
+            var controller = new ScrollMagic.Controller();
+
+
+            // Scale Scene
+            var scale_scene = new ScrollMagic.Scene({
+                triggerElement: '#scale-trigger'
+            })
+                    .setTween(scale_tween);
+
+            // Background Scene
+            var bg_scene = new ScrollMagic.Scene({
+                triggerElement: '#bg-trigger'
+            })
+                    .setTween(bg_tween);
+
+            // YoYo Scene
+            var yoyo_scene = new ScrollMagic.Scene({
+                triggerElement: '#yoyo-trigger'
+            })
+                    .setTween(yoyo_tween);
+
+            controller.addScene([
+                scale_scene,
+                bg_scene,
+                yoyo_scene
+            ]);
+        </script>
+    </body>
+</html>

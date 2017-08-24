@@ -1,0 +1,445 @@
+<!DOCTYPE html>
+
+<html>
+    <head>
+        <title>Edward Bersin's AngularJS CRUD</title>
+
+        <style>
+            body {
+                text-shadow: 2px 2px maroon;
+                background-color: maroon;
+                color: white;
+                font-family: "Helvetica", serif;
+                font-size:16px;
+            }
+            a {
+                color: white;
+            }
+            .dataList th {
+                padding: 4px; 
+                background-color: maroon; 
+                font-weight:bold;
+                border: 2px solid black;
+                border-radius: 3px;
+            }
+            .dataList td {
+                padding: 4px; 
+                background-color: maroon;
+                border: 2px solid black;
+                border-radius: 3px;
+            }
+            .bigButton {
+                font-size:15px; 
+                font-weight:bold;
+            }
+            .twoUp {
+                background-color: darkgreen;
+                padding: 1%;
+                box-sizing: border-box;
+                width: 100%;
+                border: 3px solid black;
+            }
+            .threeUp {
+                background-color: darkgreen;
+                padding: 1%;
+                box-sizing: border-box;
+                width: 100%;
+                border: 3px solid black;
+            }
+            .errorStyle {
+                color:red;
+            }
+
+            /* ------------ Desktop Only Styles --------------- */
+            @media screen and (min-width: 600px) {
+                .twoUp {
+                    float: left;
+                    width: 48%;
+                    margin: 0px 1%; 
+                    border: 3px solid black;
+                }
+                .threeUp {
+                    float: left;
+                    width: 99%;
+                    margin: 0px 1%; 
+                    border: 3px solid black;
+                }
+            }
+        </style>
+    </head>
+
+    <body>
+        <a href="index.html">HOME</a>
+        <br/>
+        <br/>
+        <div data-ng-app="myApp">
+            <div data-ng-controller="MyCtrl">
+
+                <div class="twoUp" style="line-height:3em;">
+                    <table>
+                        <tr>
+                            <td>
+                                <strong>Email:</strong>
+                            </td>
+                            <td>
+                                <input type="email" class="form-control" name="email" ng-model="email" id="inputEmail3" placeholder="Email"/>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <strong>Password:</strong>
+                            </td>
+                            <td>
+                                <input type="password" class="form-control" name="passw" ng-model="passw" id="inputPassword3" placeholder="Password"/>
+                            </td>
+                        </tr>
+
+                    </table> 
+                    <button type="submit" class="bigButton" data-dismiss="modal" data-ng-show="DisplayLogin" data-ng-click="login()">Sign in</button>                            
+                    <button type="button" data-ng-show="DisplayLogoff" class="bigButton" data-ng-click="logoff()">Log Off</button>
+
+                    <p>Use the following information to test the login functionality.<br>
+                        Email: tuf18309@temple.edu<br>
+                        Password: a_birthday<br>
+                        Error messages will appear below this text or at the bottom of the table.
+                    </p>
+                    <div data-ng-show="LoginCheck">
+                        <h4>{{Logon}}</h4>
+                    </div>
+                </div>
+
+                <div class="twoUp" style="line-height:3em;">
+                    <form id="showForm" ng-show="editMode">
+                        <input type="hidden" data-ng-model="newshow.Show_ID" />
+                        <table>
+                            <tr>
+                                <td>
+                                    <strong>Title:</strong>
+                                </td>
+                                <td>
+                                    <input type="text" name="Title" id="Title" data-ng-model="newshow.Title" placeholder="Title" required/>
+                                </td>
+                                <td class="errorStyle">
+                                    {{myErrors.Title}}
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <strong>Image URL:</strong>
+                                </td>
+                                <td>
+                                    <input type="text" name="URL" id="URL" data-ng-model="newshow.URL" placeholder="URL"/>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <strong>Channel:</strong>
+                                </td>
+                                <td>
+                                    <input type="text" name="Channel" id="Channel" data-ng-model="newshow.Channel" placeholder="Channel" required/>
+                                </td>
+                                <td class="errorStyle">
+                                    {{myErrors.Channel}}
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <strong>Rating:</strong>
+                                </td>
+                                <td>
+                                    <input type="text" name="Rating" data-ng-model="newshow.Rating" value="Rating" placeholder ="Rating"/>
+                                </td>
+                                <td class="errorStyle">
+                                    {{myErrors.Rating}}
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <strong>Air Date:</strong>
+
+                                </td>
+                                <td>
+                                    <input type="text" name="Year_First_Aired" data-ng-model="newshow.Year_First_Aired" placeholder ="Year Aired" required/>
+                                </td>
+                                <td class="errorStyle">
+                                    {{myErrors.Year_First_Aired}}
+                                </td>
+                            </tr>
+                        </table>
+
+                        <input type="button" class="bigButton" value="Insert" data-ng-show="DisplaySave" data-ng-click="createShow()" />
+                        <input type="button" class="bigButton" value="Update" data-ng-show="DisplayUpdate" data-ng-click="updateShow()" />
+
+                        <!-- we do not want the user to click the submit button, 
+                        but we do want to programmatically invoke the submit button's 
+                        click event -- only if the form validates (both for insert as well as update).
+                        -->
+                        <div style="display:none;">
+                            <input type="submit" value="submit" id="submitButton"/>
+                        </div>
+                    </form>
+                </div>
+
+                <div class="threeUp">
+                    <h2>Show List</h2>
+
+                    <table class="dataList">
+                        <tr>
+                            <th>Show ID</th>
+                            <th>Title</th>
+                            <th>Image</th>
+                            <th>Channel</th>
+                            <th>Rating</th>
+                            <th>Air Date</th>
+                            <th ng-show="editMode">Manage</th>
+                        </tr>
+                        <tr data-ng-repeat="show in TV_Shows">
+                            <td>{{show.Show_ID}}</td>
+                            <td>{{show.Title}}</td>
+                            <td><img style="width:120px; height:180px;" src="{{show.URL}}" alt="pic"></td>
+                            <td>{{show.Channel}}</td>
+                            <td>{{show.Rating}}</td>
+                            <td>{{show.Year_First_Aired}}</td>
+                            <td> <a href="" data-ng-show="editMode" data-ng-click="editShow(show.Show_ID)">Edit |</a>
+                                <a href="" data-ng-show="editMode" data-ng-click="deleteShow(show.Show_ID)">Delete</a>
+                            </td>
+                        </tr>
+                    </table>
+                    <br />
+                    <p>{{status}}</p>  
+                    <p>{{listStatus}}</p>  
+                </div>
+            </div>
+        </div>
+
+        <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/angularjs/1.0.7/angular.min.js"></script>
+
+        <script type="text/javascript">
+
+                        /*   
+                         * These are the property names in my StringData class.
+                         * I am trying to match these names in my client side code -
+                         * to facilitate the conversion between json and java object.
+                         * 
+                         
+                         public String Show_ID = "";
+                         public String Title = "";
+                         public String URL = "";
+                         public String Channel = "";
+                         public String Rating = "";
+                         public String Year_First_Aired = "";
+                         
+                         */
+
+                        //Define an Angular module
+                        var myApp = angular.module('myApp', []);
+
+                        myApp.controller('MyCtrl', ['$scope', '$http', function ($scope, $http) {
+
+                                GetShows(); //Retrieving the List of shows
+                                $scope.DisplaySave = true; //Displaying the Save button
+                                $scope.DisplayUpdate = false; //Hiding the Update button
+                                $scope.DisplayLogin = true;
+                                $scope.DisplayLogoff = false;
+                                $scope.editMode = false;
+                                $scope.LoginCheck = false;
+
+                                $scope.login = function () {
+                                    console.log("Reached Success");
+                                    $http.get('loginApi.jsp?userEmailInput=' + $scope.email + '&userPwdInput=' + $scope.passw).
+                                            success(function (data) {
+
+                                                $scope.LoginCheck = true;
+
+                                                if (data.length < 19) {
+
+                                                    $scope.Logon = data;
+                                                    console.log($scope.Logon);
+
+                                                } else {
+
+
+                                                    $scope.Logon = data;
+                                                    $scope.DisplayLogin = false;
+                                                    $scope.DisplayLogoff = true;
+                                                    $scope.editMode = true;
+                                                    $scope.status = "Person logged in successfully.";
+                                                }
+                                            })
+                                            .error(function (error, status) {
+                                                // this is a whole html page but inside it explains the status code
+                                                console.log("error message:" + error);
+                                                $scope.status = 'Unable to Login. Status: ' + status;
+                                            });
+
+                                };
+
+                                $scope.logoff = function () {
+                                    $http.get("logoffApi.jsp").success(function (data) {
+                                        $scope.editMode = false;
+                                        $scope.DisplayLogin = true;
+                                        $scope.DisplayLogoff = false;
+                                        $scope.LoginCheck = false;
+                                    });
+                                };
+
+                                function GetShows() {
+                                    //Defining the $http service for getting the shows
+                                    $http.get('webApi.jsp').
+                                            success(function (data) {
+
+                                                //Clear the show object (with default values)
+                                                //to be ready for create operation. 
+                                                $scope.newshow = {
+                                                    Show_ID: '',
+                                                    Title: ''};
+
+                                                console.log(data);
+
+                                                $scope.listStatus = data.dbError;
+                                                $scope.TV_Shows = data.recordList;
+
+                                            })
+                                            .error(function (error, status) {
+                                                // this is a whole html page but inside it explains the status code
+                                                console.log("error message:" + error);
+                                                $scope.status = 'Unable to retrieve show list. Status: ' + status;
+                                            });
+                                } // GetShows
+
+                                //Edit a show (pull data from the list into the input area on the form)
+                                $scope.editShow = function (pId) {
+                                    for (i in $scope.TV_Shows) {
+
+                                        //Get show details from scope based on id
+                                        if ($scope.TV_Shows[i].Show_ID === pId) {
+
+                                            // Assign initial values for the user to edit
+                                            // -- extract from the show list
+                                            $scope.newshow = {
+                                                Show_ID: $scope.TV_Shows[i].Show_ID,
+                                                Title: $scope.TV_Shows[i].Title,
+                                                URL: $scope.TV_Shows[i].URL,
+                                                Channel: $scope.TV_Shows[i].Channel,
+                                                Rating: $scope.TV_Shows[i].Rating,
+                                                Year_First_Aired: Number($scope.TV_Shows[i].Year_First_Aired)
+                                            };
+                                            $scope.DisplaySave = false; // hide save button 
+                                            $scope.DisplayUpdate = true; // show the update button
+                                            $scope.status = ''; // clear status
+                                        }
+                                    }
+                                };
+
+                                //Update a show (the update button after a show is done editing a record)
+                                $scope.updateShow = function () {
+
+                                    var myData = JSON.stringify($scope.newshow);
+
+                                    // If any input field in the form is invalid, do not make the 
+                                    // ajax call to update the show. Instead, programmatically trigger the 
+                                    // click event of the submit button. Since there is some invalid input 
+                                    // within the form, no submit will not actually happen, but HTML5 will 
+                                    // show the first validation error message (like tool tip).
+
+                                    //if (!document.getElementById('showForm').checkValidity()) {
+                                    document.getElementById('submitButton').click();
+                                    //} else {
+
+                                    //Define $http service for updating a show
+                                    $http({
+                                        method: 'POST',
+                                        url: 'updateApi.jsp',
+                                        data: 'jsonData=' + JSON.stringify($scope.newshow),
+                                        headers: {'Content-Type': 'application/x-www-form-urlencoded'}
+                                    }).
+                                            success(function (data) {
+                                                console.log("update success");
+                                                console.log(data);
+                                                $scope.myErrors = data; // get error list back from web api
+                                                $scope.status = $scope.myErrors.errorMsg;
+                                                if ($scope.myErrors.errorMsg.length === 0) {
+                                                    GetShows(); //Reload shows to the $scope
+                                                    $scope.DisplaySave = true; //Display save button
+                                                    $scope.DisplayUpdate = false; // Hide update button
+                                                    $scope.status = "Show Updated Sucessfully: \n" + myData;
+                                                }
+                                            })
+                                            .error(function (error) {
+                                                $scope.status = 'Unable to update show: ' + error.message;
+                                            });
+                                    //}
+                                };
+
+                                //Create a new show (Save/Insert)
+                                $scope.createShow = function () {
+
+                                    var myData = JSON.stringify($scope.newshow);
+
+                                    // If any input field in the form is invalid, do not make the 
+                                    // ajax call to update the bok. Instead, programmatically trigger the 
+                                    // click event of the submit button. Since there is some invalid input 
+                                    // within the form, no submit will not actually happen, but HTML5 will 
+                                    // show the first validation error message (like tool tip).
+
+                                    //if (!document.getElementById('showForm').checkValidity()) {
+                                    document.getElementById('submitButton').click();
+                                    //} else {
+
+                                    //Defining $http service for creating a show
+                                    $http({
+                                        method: 'POST',
+                                        url: 'insertApi.jsp',
+                                        data: 'jsonData=' + JSON.stringify($scope.newshow),
+                                        headers: {'Content-Type': 'application/x-www-form-urlencoded'}
+                                    }).
+                                            success(function (data) {
+                                                console.log("insert success");
+                                                console.log(data);
+                                                /*data = extractObj(data);
+                                                 console.log("after extracting object");
+                                                 console.log(data);*/
+                                                $scope.myErrors = data; // get error list back from web api
+                                                $scope.status = $scope.myErrors.errorMsg;
+                                                if ($scope.myErrors.errorMsg.length === 0) {
+                                                    GetShows(); //Reload people to the $scope
+                                                    $scope.status = "Show Inserted Successfully:\n" + myData;
+                                                }
+                                            })
+                                            .error(function (error) {
+                                                $scope.status = 'Unable to insert show: ' + error.message;
+                                            });
+                                    //}
+                                };
+
+                                //Delete a show
+                                $scope.deleteShow = function (pId) {
+                                    //alert("to delete id " + pId);
+                                    //Defining $http service for deleting a show
+                                    $http({
+                                        method: 'POST',
+                                        url: 'deleteApi.jsp',
+                                        data: 'id=' + pId,
+                                        headers: {'Content-Type': 'application/x-www-form-urlencoded'}
+                                    }).
+                                            success(function (data) {
+                                                console.log("delete success!");
+                                                console.log(data);
+                                                $scope.status = data.trim();
+                                                //console.log("Length of $scope.status is "+$scope.status.length);
+                                                if ($scope.status == 0) {
+                                                    GetShows(); //Reload shows to the $scope
+                                                    $scope.status = "Show successfully deleted";
+                                                }
+                                            })
+                                            .error(function (error) {
+                                                $scope.status = 'Unable to delete the show: ' + error.message;
+                                            });
+                                };
+
+                            }]);
+
+        </script>
+
+    </body>
+</html>

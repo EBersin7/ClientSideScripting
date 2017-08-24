@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Edward Bersin's 4350 Web API JQ</title>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+        <link href="apistyles.css" rel="stylesheet" type="text/css" />
+
+    </head>
+    <body>
+
+        <div id="box">
+            <div id ="box1">
+                <h1>Find A Top Rated TV Show</h1>
+
+                Enter the starting characters of a TV show and click the button to search, for example:
+
+                <input type="text" id="showSearch" value="G" />
+                <input type="button" value="Get Show" id="search" />
+                <br />
+                <div id="databaseError"></div>
+                <br />
+            </div>
+            <div id="showContent">
+                <table id="showTable">
+                    <thead><tr><th>Title</th><th>Logo</th><th>Network</th><th>Rating</th><th>First Aired</th></tr></thead>
+                    <tr>
+                        <td id="showTitle"></td>
+                        <td id="showURL">
+                            <img id="imageURL" src="" alt="image-URL"/>
+                        </td>
+                        <td id="showChannel"></td>
+                        <td id="showRating"></td>
+                        <td id="showYear"></td>
+                    </tr>
+                </table>
+                <br />
+            </div>
+        </div>
+
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.0/jquery.min.js"></script>
+        <script language="Javascript" type="text/javascript">
+            $(document).ready(function () {
+
+                $("#showURL").hide();
+                $("#showTable>thead").hide();
+
+                $('#search').click(function ()
+                {
+                    //clear things out from possible previous search
+                    $("#showURL").hide();
+                    $("#imageURL").attr("src", "");
+                    $("#showTitle").html("");
+                    $("#showChannel").html("");
+                    $("#showRating").html("");
+                    $("#showYear").html("");
+
+                    var url = "webApi.jsp";
+                    url += "?q=" + $("#showSearch").val();
+
+                    ajaxSuccess = function (response) {
+
+                        var obj = eval(response);
+
+                        if (obj.dbError === null) {
+                            $("#databaseError").html("Search is currently unavailable.");
+                            return;
+                        }
+
+                        if (obj.dbError.length > 0) {
+                            $("#databaseError").html("Error: " + obj.dbError);
+                            return;
+                        }
+
+                        if (parseInt(obj.listSize) === 0) {
+                            $("#databaseError").html("No Shows Match Your Search");
+                            return;
+                        }
+
+                        var image = obj.recordList[0].URL;
+                        $("#imageURL").attr("src", image);
+
+                        $("#showTitle").html(obj.recordList[0].Title);
+                        $("#showChannel").html(obj.recordList[0].Channel);
+                        $("#showRating").html(obj.recordList[0].Rating);
+                        $("#showYear").html(obj.recordList[0].Year_First_Aired);
+
+                        $("#showURL").show();
+                        $("#showTable>thead").show();
+                    };
+
+                    ajaxError = function () {
+                        alert("Unable to retrieve data.");
+                    };
+
+                    $.ajax(
+                            {
+                                type: "GET",
+                                cache: false,
+                                url: url,
+                                dataType: "json",
+                                timeout: 5000, // 5000 milliseconds
+                                success: ajaxSuccess,
+                                error: ajaxError
+                            }); //end of $.ajax
+                });
+            });
+        </script>
+    </body>
+</html>

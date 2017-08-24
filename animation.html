@@ -1,0 +1,174 @@
+<html>
+
+    <head>
+        <title>Edward Bersin's 4350 Website Animation</title> <!-- the title displayed on the browser tab -->
+
+        <link href="styles.css" rel="stylesheet" type="text/css" /> <!-- the reference to the external style sheet CSS -->
+
+        <script src="http://ajax.googleapis.com/ajax/libs/angularjs/1.4.8/angular.min.js"></script> <!-- the reference to the angular js library, allows use of ng-include directive -->
+
+        <style>
+
+            /*block for the background*/
+            #aniBlock{
+                position: relative;
+                background-image: url(MK.png);
+                background-repeat: repeat;
+                background-position: center top;
+
+                width: 900px;
+                min-width:40%;
+                height: 500px;
+                min-height: 40%; 
+                margin-left:auto;
+                margin-right:auto;
+
+                box-shadow: 10px 10px 5px grey;
+                border: 3px solid black;
+                border-radius: 10px;
+
+                padding-left: 10px;
+                padding-right: 10px;
+                padding-bottom: 5px;
+            }
+            
+            /*the pipes*/
+            #P1{
+                position: relative;
+                width: 50px;
+                height: 45px;
+                top: 375px;
+                left: 860px;
+                background-image: url(P1.png);
+                z-index: 5;
+            }
+            #P2{
+                position: relative;
+                width: 60px;
+                height: 47px;
+                top: 330px;
+                left: -10px;
+                background-image: url(P2.png);
+                z-index: 5;
+            }
+            
+            /*the entire sprite sheet*/
+            .mSprite {
+                position:absolute;
+                top:400px;
+                left:10px;
+                z-index:4;
+                height: 40px;
+                width:  25px;
+                background-image:url(MSprite.png);
+                background-position-x: 0px;
+            }
+
+            /*individual positions of the poses*/
+            .mSprite1 {
+                background-position-x: 0px;  
+            }
+            .mSprite2 {
+                background-position-x: -28px;  
+            }
+            .mSprite3 {
+                background-position-x: -54px;  
+            }
+            .mSprite4 {
+                background-position-x: -84px; 
+            }
+            .mSprite5 {
+                background-position-x: -124px; 
+            }
+            .mSprite6 {
+                background-position-x: -176px;
+                background-position-y: -85px;
+            }
+            .mSprite7 {
+                background-position-x: -145px;
+                background-position-y: -85px;
+            }
+
+        </style>
+    </head>
+
+    <body>
+
+        <div ng-app=""> <!-- allows for use of ng directives -->
+
+            <div id="container"> <!-- box to hold all the other elements -->
+
+                <div ng-include src="'top.html'"> </div> <!-- reference to top.html for the header -->
+
+                <div id="content"> <!-- holds main content of the page -->
+
+                    <div id="aniBlock"> <!-- new div for animation -->
+
+                        <input type ="button" value="Change Mario Pose" onclick="advancePose()"/>
+                        <input type ="button" value="Move Mario" onclick="startAnimation()"/>
+                        <input type ="button" value="Stop Mario" onclick="stopAnimation()"/><br/>
+
+                        <div id="P1"></div>
+                        <div id="P2"></div>
+                        
+                        <div id="Mario" class="mSprite mSprite1"> </div> 
+
+                    </div>
+
+                    <div ng-include src="'bottom.html'"> </div> <!-- reference to bottom.html for the footer -->
+
+                </div>
+
+            </div>
+
+        </div>
+
+        <script type="text/javascript">
+            
+            //function to grab HTML element
+            function $(element){
+                return document.getElementById(element);
+            }
+            
+            //global variable to count through the sprite set
+            var i = 1;
+            //function to move forward in the sprite set
+            function advancePose() {
+                i = i + 1;
+                if (i > 7) {
+                    i = 2;
+                }
+                document.getElementById('Mario').className = 'mSprite mSprite' + i;
+                position();
+            }
+
+            //function to run the loop of the animation by itself
+            var intervalHandle;
+            function startAnimation() {
+                advancePose();
+                intervalHandle = setInterval(advancePose, 125);
+            }
+            //function to stop the animation from continuing
+            function stopAnimation() {
+                clearInterval(intervalHandle);
+            }
+            //function to change the position of the image through the object's fields
+            function position() {
+                if (mario.left > 885) {
+                    mario.left = 0;
+                    mario.style.left = mario.left + "px";
+                } else {
+                    mario.left += mario.dx;
+                    mario.style.left = mario.left + "px";
+                }
+            }
+            //usage of the javascript object to control the div element and set its related variables for movement
+            var mario = $("Mario");
+            mario.left = 30;
+            mario.dx = 10;
+
+        </script>
+
+    </body>
+
+</html>

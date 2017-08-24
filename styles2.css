@@ -1,0 +1,193 @@
+html, body {
+    height:100%; /* ensures the body fills the whole page even if not enough content*/
+    margin:0; /* allows the body to fill the whole page*/
+    padding:0; /* allows the body to fill the whole page*/
+
+    background-image: url(BG2.jpg); /* puts a background image across the body, repeat ensures it fills the page*/
+    background-size: 100% 100%;
+}
+
+#titleNav {
+    z-index:5; /* ensures that the nav bar stays on top of content*/
+    position:fixed; /* locks the nav bar into the top left of the page and always appears*/
+    width:100%; /* ensures the nav bar fills the whole width of the page*/
+    top:0px;
+    left:0px;
+
+    border-bottom: 5px solid black; /* creates a thick, black border below the block*/
+
+    font-family: "Comic-Sans", serif;
+    background-color: #38B42E; /* color taken from the background image, matches better*/
+    height: 80px;
+    min-width: 600px;
+    
+}
+
+#pageTitle {
+    padding-top:10px; /* creates distance for formatting changes*/
+    padding-left:10px;
+    font-size:45px;
+    font-weight:bold;
+    
+    min-width: 400px;
+
+    font-family: "Comic-Sans", serif;
+    letter-spacing: 1px;
+    text-align:center;
+    float:left;
+    
+}
+
+#pageTitle a:link { /* before being clicked*/
+    position: relative;
+    color:white;
+    text-decoration: none;
+}
+
+#pageTitle a:visited { /* after being clicked*/
+    position: relative;
+    color:white;
+    text-decoration: none;
+}
+
+#pageTitle a:hover{ /* while hovering over*/
+    position: relative;
+    background-color:#666666;
+    border-radius: 10px; /* advanced technique, rounding the highlight box*/
+    text-decoration: none;
+}
+
+#nav {
+    min-width: 400px;
+    padding-top:10px;
+    padding-right:0px;
+    font-size:25px;
+    letter-spacing: 1.25px;
+    font-weight:bold;
+    float:right;
+    text-align:center;
+    font-family: "Comic-Sans", serif;
+
+}
+
+.navLink {
+    position: relative;
+    
+    min-width: 400px;
+    
+    text-decoration:none; /* formatting changes for the links in the nav bar*/
+    padding: 5px;
+    padding-top:20px;
+    padding-bottom:17px;
+    background-color: white;
+    
+    border-color: black;
+    border-style: solid;
+    border-width: thick;
+    
+    margin-left:3px;
+    margin-right:3px;
+    font-family: "Comic-Sans", serif;
+}
+
+.navLink a:link {  /* style before it's been clicked */
+    position: relative;
+    color:black;
+    text-decoration: none;
+}
+
+.navLink a:visited {  /* style after it's been clicked */
+    position: relative;
+    color: #3DAA37;
+    text-decoration: none;
+}
+
+.navLink a:hover{
+    position: relative;
+    text-decoration: none;
+    background-color:#666666;
+    border-radius: 10px;
+}
+
+.stopFloat {
+    clear:both;
+}
+
+#content {
+    padding: 20px;
+
+    font-weight:bold;
+
+    height: 100%;
+    color:black;
+ 
+    margin-top: 90px;
+    margin-bottom: 35px;
+    padding: 10px;
+}
+
+#block{
+    opacity: 0;
+    
+    max-width:800px;
+    min-width:400px;
+    margin-left:auto;
+    margin-right:auto;
+    
+    padding-left: 10px;
+    padding-right: 10px;
+    padding-bottom: 5px;
+    
+    background:linear-gradient(white, white, lightblue);
+    border: 3px solid black;
+    border-radius: 1px;
+}
+
+#expand{
+    opacity: 0;
+    
+    background-image: url(L.JPG);
+    background-position-x: -675px;
+    background-position-y: -130px;
+    
+    width: 205px;
+    height: 100px;
+    
+    margin-top: 50px;
+    margin-left:auto;
+    margin-right:auto;
+    
+    padding-left: 10px;
+    padding-right: 10px;
+    padding-bottom: 5px;
+    
+    border: 3px solid black;
+    border-radius: 3px;
+}
+
+h1, h2, h3 {
+    font-family: "Comic-Sans", serif;
+    text-align: center;
+    font-weight: bold;
+    text-shadow: 2px 2px 1px #888888; /* horizontal drop of shadow, vertical drop, size of "blur", color of blur */
+}
+
+#footer {
+    z-index: 5; /* ensures that the nav bar stays on top of content*/
+    position: fixed; /* locks the nav bar into the top left of the page and always appears*/
+    width: 100%; /* ensures the nav bar fills the whole width of the page*/
+    bottom: 0px;
+    left: 0px;
+
+    border-top: 5px solid black; /* creates a thick, black border around the block*/
+
+    color: white;
+    clear: both;
+    text-align: center;
+    padding: 10px;
+
+    font-family: "Comic-Sans", serif;
+    font-size:20px;
+    letter-spacing:0.75px;
+    background-color: #38B42E; /* color taken from the background image, matches better*/
+}
